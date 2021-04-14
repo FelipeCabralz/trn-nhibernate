@@ -1,24 +1,29 @@
 ﻿using System;
 
-namespace TrnDotnetDataAccess.Entidades
+namespace TrnNHibernate.Entidades
 {
     public class Cliente
     {
-       
-        public int Id { get; private set; }
-        public string Nome { get; private set; }
-        public string Email { get; private set; }
-        public string Senha { get; private set; }
+
+        public virtual int Id { get; protected set; }
+        public virtual string Nome { get; protected set; }
+        public virtual string Email { get; protected set; }
+        public virtual string Senha { get; protected set; }
         public Cliente(string nome, string email, string senha)
         {
             Nome = nome;
             Email = email;
             Senha = senha;
         }
-        public void Atualizar(string nome,string email)
-        {          
+        protected Cliente()
+        {
+
+        }
+        public virtual void Atualizar(string nome, string email, string senha)
+        {
             Nome = nome;
             Email = email;
+            Senha = senha;
         }
 
     }

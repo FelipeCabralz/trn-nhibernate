@@ -5,10 +5,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrnNHibernate.Core.Infrastructure.Config;
 
 namespace TrnNHibernate.Api
 {
@@ -24,7 +26,13 @@ namespace TrnNHibernate.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ISessionFactory>(new NHibernateConfig(Configuration)
+                .BuildSessionFactory());
+            services.AddScoped<ISession>(x => x.GetService<ISessionFactory>().OpenSession());
             services.AddControllers();
+
+            //var nhibernateConfig = new NHibernateConfig(Configuration);
+            //nhibernateConfig.CreateSchema();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +45,7 @@ namespace TrnNHibernate.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

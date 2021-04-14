@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TrnDotnetDataAccess.Entidades
+namespace TrnNHibernate.Entidades
 {
     public class ItemPedido
     {
