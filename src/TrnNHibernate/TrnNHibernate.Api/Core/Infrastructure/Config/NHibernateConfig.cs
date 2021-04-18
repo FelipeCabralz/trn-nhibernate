@@ -5,6 +5,7 @@ using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using TrnNHibernate.Api.Core.Infrastructure.Maps;
 
 namespace TrnNHibernate.Core.Infrastructure.Config
@@ -21,7 +22,11 @@ namespace TrnNHibernate.Core.Infrastructure.Config
 
             _fluentConfiguration = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2012.ConnectionString(configuration.GetConnectionString("Default")))
-                .Mappings(x => x.FluentMappings.Add<ClienteMap>());
+                //.Mappings(x => x.FluentMappings
+                //    .Add<ClienteMap>()
+                //    .Add<ProdutoMap>()
+                //);
+                .Mappings(x => x.FluentMappings.AddFromAssembly(Assembly.GetAssembly(typeof(ClienteMap))));
         }
 
         public ISessionFactory BuildSessionFactory()

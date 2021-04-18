@@ -7,10 +7,15 @@ namespace TrnNHibernate.Entidades
     public class Produto
     {
 
-        public int Id { get; protected set; }
-        public string Nome { get; protected set; }
-        public decimal PrecoUnitario { get; protected set; }
-        public int QuantidadeEstoque { get; protected set; }
+        public virtual int Id { get; protected set; }
+        public virtual string Nome { get; protected set; }
+        public virtual decimal PrecoUnitario { get; protected set; }
+        public virtual int QuantidadeEstoque { get; protected set; }
+
+        protected Produto()
+        {
+
+        }
 
         public Produto(string nome, decimal precoUnitario, int quantidadeEstoque)
         {
@@ -19,7 +24,7 @@ namespace TrnNHibernate.Entidades
             QuantidadeEstoque = quantidadeEstoque;
         }
 
-        public void Atualizar(string nome, decimal precoUnitario, int quantidadeEstoque)
+        public virtual void Atualizar(string nome, decimal precoUnitario, int quantidadeEstoque)
         {
             Nome = nome;
             PrecoUnitario = precoUnitario;

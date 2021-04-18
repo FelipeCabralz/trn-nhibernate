@@ -44,7 +44,13 @@ namespace TrnNHibernate.Api.Controllers
 
             return Ok("Cliente atualizado com sucesso");
         }
-
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult RecuperarCliente(int id)
+        {
+            var cliente = _session.Get<Cliente>(id);
+            return Ok(cliente);
+        }
 
     }
 }
